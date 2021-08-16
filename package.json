@@ -1,0 +1,28 @@
+{
+  "name": "you-draw-i-guess",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "naive-ui": "^2.16.4",
+    "socket.io-client": "^4.1.3",
+    "vfonts": "^0.1.0",
+    "vue": "^3.0.5",
+    "vue-router": "^4.0.11",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.3.0",
+    "@vue/compiler-sfc": "^3.0.5",
+    "vite": "^2.4.4"
+  },
+  "description": "你画我猜",
+  "main": "index.js",
+  "author": "沐风",
+  "license": "MIT",
+  "private": true,
+  "repository": "https://github.com/mufeng233/YouDrawIGuess"
+}
