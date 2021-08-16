@@ -14,3 +14,8 @@ app.use(router)
 app.use(store)
 
 app.mount('#app')
+
+window.$message = import('naive-ui').MessageApi;
+window.$dialog = import('naive-ui').DialogApi;
+window.$notification = import('naive-ui').NotificationApi;
+window.$loadingBar = import('naive-ui').LoadingBarApi;

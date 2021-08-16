@@ -64,7 +64,7 @@ export default defineComponent({
             if (isExist) {
               message.error("此昵称已被占用");
             } else {
-              localStorage.getItem("nickname", nickname);
+              localStorage.setItem("nickname", nickname);
               router.push("/game");
             }
           } else {

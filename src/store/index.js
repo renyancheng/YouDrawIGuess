@@ -16,6 +16,12 @@ const store = createStore({
             lines: [] // 房间的绘图信息 (画了多少根线)
         }
     },
+    getters: {
+        isGameStarted(state) {
+            // 根据主持人是否存在, 判断游戏是否开始
+            return !!state.holder
+        }
+    },
     mutations: {
         updateNickname(state, nickname) {
             state.nickname = nickname || ''
@@ -33,7 +39,10 @@ const store = createStore({
             if (!state.nicknames.includes(nickname)) {
                 state.nicknames.push(nickname)
             }
-        }
+        },
+        updateConnected(state, connected) {
+            state.connected = connected
+        },
     },
     actions: {
         sendUserEnter(context) {
@@ -47,6 +56,12 @@ const store = createStore({
                     resolve(isExist)
                 })
             })
+        },
+        sendStartGame(context, imageAnswer) {
+            socket.emit('start_game', imageAnswer)
+        },
+        sendStopGame(context) {
+            socket.emit('stop_game')
         }
     }
 })
