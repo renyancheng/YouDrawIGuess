@@ -13,4 +13,4 @@ yarn dev
 
 ```
 
-服务端详见(YouDrawIGuessServer)[https://github.com/mufeng233/YouDrawIGuessServer.git]
+服务端详见[YouDrawIGuessServe](https://github.com/mufeng233/YouDrawIGuessServer.git)
