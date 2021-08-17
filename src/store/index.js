@@ -20,6 +20,9 @@ const store = createStore({
         isGameStarted(state) {
             // 根据主持人是否存在, 判断游戏是否开始
             return !!state.holder
+        },
+        isGameHolder(state) {
+            return state.nickname === state.holder
         }
     },
     mutations: {
@@ -43,6 +46,16 @@ const store = createStore({
         updateConnected(state, connected) {
             state.connected = connected
         },
+        drawNewLine(state, newLine) {
+            state.lines.push(newLine)
+        },
+        updateNewLine(state, lastLine) {
+            const line = state.lines[state.lines.length - 1]
+            line.points = lastLine.points
+        },
+        delFromNicknames(state, nickname) {
+            state.nicknames = state.nicknames.filter(item => item !== nickname)
+        }
     },
     actions: {
         sendUserEnter(context) {
@@ -62,6 +75,20 @@ const store = createStore({
         },
         sendStopGame(context) {
             socket.emit('stop_game')
+        },
+        sendDrawNewLine(context, line) {
+            socket.emit('new_line', line)
+        },
+        sendUpdateNewLine(context, line) {
+            socket.emit('update_line', line)
+        },
+        sendAnswerGame(context, inputImageName) {
+            socket.emit('answer_game', inputImageName)
+        },
+        sendUserLeave(context) {
+            socket.emit('leave')
+            context.commit('updateNickname', '')
+            localStorage.removeItem('nickname')
         }
     }
 })

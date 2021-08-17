@@ -45,4 +45,36 @@ socket.on('game_stoped', () => {
     alert('主持人终止了当前游戏')
 })
 
+socket.on('starting_line', line => {
+    store.commit('drawNewLine', line)
+})
+
+// 监听线的更新
+socket.on('updating_line', line => {
+    store.commit('updateNewLine', line)
+})
+
+socket.on('game_answered', ({ alreadyDone, success, nickname, answer }) => {
+    if (alreadyDone) {
+        alert('当前游戏答案已经被猜中，您不能继续猜了！')
+        return
+    }
+    if (!success) {
+        alert(`玩家 ${nickname} 猜的答案不对：${answer}`)
+        return
+    }
+
+    alert(`玩家 ${nickname} 猜中正确的答案：${answer}`)
+})
+
+socket.on('user_leave', (nickname) => {
+    store.commit('delFromNicknames', nickname)
+
+    if (nickname === store.state.holder) {
+        store.commit('updateHolder', '')
+        store.commit('updateLines', [])
+        alert("主持人离开了游戏！")
+    }
+})
+
 export default socket

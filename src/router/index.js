@@ -38,7 +38,24 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    next();
+    const nickname = localStorage.getItem('nickname')
+
+    // 缓存中有昵称
+    if (nickname) {
+        // 当前是登录页
+        if (to.path === '/login') {
+            next({ path: '/game' })
+        } else {
+            next()
+        }
+    } else {
+        // 当前是登录页
+        if (to.path === '/login') {
+            next()
+        } else {
+            next({ path: '/login' })
+        }
+    }
 })
 
 router.afterEach((to, from) => {
